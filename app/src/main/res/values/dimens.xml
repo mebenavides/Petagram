@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="lista_height">100dp</dimen>
+    <dimen name="card_medida">200dp</dimen>
+    <dimen name="card_height">300dp</dimen>
+    <dimen name="card_titulo">20dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nombre_contacto">33dp</dimen>
+    <dimen name="telefono_contacto">20sp</dimen>
+    <dimen name="top">20dp</dimen>
+    <dimen name="left">20dp</dimen>
+    <dimen name="elevation_actinbar">20dp</dimen>
+    <dimen name="corner_radius_cardview">4dp</dimen>
+</resources>

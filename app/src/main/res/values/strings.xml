@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Petagram</string>
+    <string name="texto_titulo">Hola Mundo</string>
+    <string name="texto_boton_click">CLICK</string>
+    <string name="mensaje">Mi Favorito :)</string>
+    <string name="texto_accion">accion</string>
+
+    <string-array name="planetas">
+        <item>Mercurio</item>
+        <item>Venus</item>
+        <item>Tierra</item>
+        <item>Marte</item>
+        <item>Jupiter</item>
+    </string-array>
+
+    <string name="titulo_tarjeta">Título</string>
+    <string name="descripcion_tarjeta">Descripción</string>
+    <string name="nombre">nombre</string>
+    <string name="rate">1</string>
+</resources>
