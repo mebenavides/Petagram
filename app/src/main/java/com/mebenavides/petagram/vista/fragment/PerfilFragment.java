@@ -1,7 +1,5 @@
-package com.mebenavides.petagram;
+package com.mebenavides.petagram.vista.fragment;
 
-import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mebenavides.petagram.Mascota;
+import com.mebenavides.petagram.adapter.MascotaPerfilAdaptador;
+import com.mebenavides.petagram.R;
 
 import java.util.ArrayList;
 

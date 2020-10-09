@@ -1,6 +1,7 @@
 package com.mebenavides.petagram;
 
 public class Mascota {
+    private int id;
     private String nombre;
     private int foto;
     private int rate;
@@ -9,7 +10,21 @@ public class Mascota {
         this.foto = foto;
         this.nombre = nombre;
         this.rate = rate;
+
     }
+
+    public Mascota() {
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }

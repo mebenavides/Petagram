@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.mebenavides.petagram.adapter.MascotaAdaptador;
+
 import java.util.ArrayList;
 
 public class Favoritos extends AppCompatActivity {

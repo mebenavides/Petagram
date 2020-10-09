@@ -1,4 +1,4 @@
-package com.mebenavides.petagram;
+package com.mebenavides.petagram.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

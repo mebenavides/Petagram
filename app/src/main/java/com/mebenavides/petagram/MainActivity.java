@@ -1,51 +1,54 @@
 package com.mebenavides.petagram;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.mebenavides.petagram.adapter.PageAdapter;
+import com.mebenavides.petagram.vista.fragment.PerfilFragment;
+import com.mebenavides.petagram.vista.fragment.RecyclerviewFragment;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int CODIGO_SOLICITUD_PERMISO = 1;
+    private static final int CODIGO_SOLICITUD_HABILITAR_BLUETOOTH = 0;
     //SwipeRefreshLayout sfiMiIndicadorRefresh;
     //ListView lstMiLista;
     //Adapter adaptador;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    private Context context;
+    private Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //androidx.appcompat.widget.Toolbar miActionBar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.miActionBar);
         //setSupportActionBar(miActionBar);
-
+        context = getApplicationContext();
+        activity = this;
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -200,4 +203,47 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     */
+
+    public void habilitarBluetooth (View v){
+        solicitarPermiso();
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(MainActivity.this, "Tu dispositivo no tiene bluetooth", Toast.LENGTH_LONG).show();
+        }
+        if (!mBluetoothAdapter.isEnabled()){
+            Intent habilitarBluetoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(habilitarBluetoothIntent, CODIGO_SOLICITUD_HABILITAR_BLUETOOTH);
+        }
+    }
+
+    public boolean checarStatusPermiso(){
+        int resultado = ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH);
+        if (resultado == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void solicitarPermiso(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.BLUETOOTH)){
+            Toast.makeText(this, "El permiso ya fue otorgado", Toast.LENGTH_LONG).show();
+        }else{
+            ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.BLUETOOTH}, CODIGO_SOLICITUD_PERMISO);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case CODIGO_SOLICITUD_PERMISO:
+                if (checarStatusPermiso()) {
+                    Toast.makeText(MainActivity.this, "Ya está activo este permiso", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MainActivity.this, "No está activo este permiso", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
 }
